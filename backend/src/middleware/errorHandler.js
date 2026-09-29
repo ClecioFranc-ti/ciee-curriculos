@@ -1,0 +1,2 @@
+function errorHandler(err, req, res, next) { console.error(err); if (err.code === 'LIMIT_FILE_SIZE') return res.status(400).json({ message: 'Arquivo inválido: o PDF deve ter no máximo 5 MB.' }); if (err.message === 'Arquivo inválido. Envie um PDF.') return res.status(400).json({ message: err.message }); const status = err.status || 500; res.status(status).json({ message: err.publicMessage || (status === 500 ? 'Erro interno do servidor.' : err.message) }); }
+module.exports = { errorHandler };
